@@ -1,4 +1,4 @@
-package com.makerchecker.web;
+package com.makerchecker;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
