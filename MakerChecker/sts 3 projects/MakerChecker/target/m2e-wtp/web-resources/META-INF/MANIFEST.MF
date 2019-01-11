@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: MakerChecker
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: gary
+Implementation-Vendor-Id: com.makerchecker
+Build-Jdk: 1.8.0_111
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/MakerChecker
+Created-By: Maven Integration for Eclipse
+
