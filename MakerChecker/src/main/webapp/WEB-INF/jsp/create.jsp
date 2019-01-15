@@ -6,6 +6,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<script type="text/javascript">
+function myFunction() {
+    var dates = new Date();
+    dd = dates.getDate();
+    mm = dates.getMonth()+1;
+    yy = dates.getFullYear();
+
+if (document.getElementById('datetext').value == ''){
+	document.getElementById('datetext').value = dd + '/' + mm + '/' + yy;
+	}
+	}
+</script>
 </head>
 <body>
 
@@ -20,7 +32,7 @@
 	<label for="customerName">Customer Name</label>
 	<form:input path="customerName"/><br><br/>
 	
-	<label for="customerAddress1">Customer Address 1</label>
+	<label for="customerAddress1" >Customer Address 1</label>
 	<form:input path="customerAddress1"/><br><br/>
 	
 	<label for="customerAddress2">Customer Address 2</label>
@@ -38,29 +50,35 @@
 	<label for="privateContactPerson">Private Contact Person</label>
 	<form:input path="privateContactPerson"/><br><br/>
 	
-	<label for="recordStatus">Record Status</label>
-	<form:input path="recordStatus"/><br><br/>
+	
+	<form:input path="recordStatus"  type="hidden"/>
 	
 	<label for="activeInactiveFlag">Active Inactive Flag</label>
-	<form:input path="activeInactiveFlag"/><br><br/>
+	<form:select path="activeInactiveFlag">
+	<option >A</option>
+  	<option >I</option>
+	</form:select><br><br/>
 	
-	<label for="createDate">Create Date</label>
-	<form:input path="createDate"/><br><br/>
 	
-	<label for="createdBy">Created By</label>
-	<form:input path="createdBy"/><br><br/>
+	<body onload="myFunction()">
 	
-	<label for="modifiedDate">Modified Date</label>
-	<form:input path="modifiedDate"/><br><br/>
+	<form:input path="createDate" id="datetext" type="hidden"/>
+	</body>
 	
-	<label for="modifiedBy">Modified By</label>
-	<form:input path="modifiedBy"/><br><br/>
+
+	<form:input path="createdBy" type="hidden"/>
 	
-	<label for="authorizedDate">Authorized Date</label>
-	<form:input path="authorizedDate"/><br><br/>
 	
-	<label for="authorizedBy">Authorized By</label>
-	<form:input path="authorizedBy"/><br><br/>
+	<form:input path="modifiedDate" type="hidden"/>
+	
+	
+	<form:input path="modifiedBy" type="hidden"/>
+	
+
+	<form:input path="authorizedDate" type="hidden"/>
+	
+	
+	<form:input path="authorizedBy" type="hidden"/>
 	
 	
 	<input type="submit" value="submit">

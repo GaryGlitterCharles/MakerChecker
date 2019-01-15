@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.makerchecker.domain.Temperary;
-import com.makerchecker.repository.JpaRepoInterface;
+import com.makerchecker.repository.JpaRepoInterfaceTemp;
 
 @Controller
 @RequestMapping("/maker")
 public class MakerController
 {
 	@Autowired
-	private JpaRepoInterface repo;
+	private JpaRepoInterfaceTemp repo;
 	
 	@GetMapping("/create")
 	public String createRecord(Model model)
