@@ -12,7 +12,11 @@
 <table>
 
 			<c:forEach items="${viewRecords}" var="element">
-
+	
+					<c:url var="authorize" value="/checker/authorize">
+						<c:param name="customerCode" value="${element.customerCode}" />
+					</c:url>
+	
 				<tr>
 					<th>${element.customerID}</th>
 					<th>${element.customerCode}</th>
@@ -31,12 +35,13 @@
 					<th>${element.modifiedBy}</th>
 					<th>${element.authorizedDate}</th>
 					<th>${element.authorizedBy}</th>
-					<th><a href="#">Authorize</a><th/>
+					<th><a href="${authorize}">Authorize</a></th>
 				</tr>
 				
 				<tr>
 			</c:forEach>
 		</table>
-			
+		
+	
 </body>
 </html>

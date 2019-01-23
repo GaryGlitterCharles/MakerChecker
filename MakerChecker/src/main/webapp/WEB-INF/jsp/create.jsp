@@ -9,7 +9,7 @@
 <script type="text/javascript">
 function myFunction() {
     var dates = new Date();
-    dd = dates.getDate();
+    dd = dates.getDate(); 
     mm = dates.getMonth()+1;
     yy = dates.getFullYear();
 

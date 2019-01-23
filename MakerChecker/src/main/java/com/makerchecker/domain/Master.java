@@ -34,8 +34,7 @@ public class Master implements Serializable
 	private String authorizedBy;
 
 	
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUST_SEQ")
-	@SequenceGenerator(sequenceName = "customer_seq", allocationSize = 1, name = "CUST_SEQ")
+
 	public int getCustomerID()
 	{
 		return customerID;
