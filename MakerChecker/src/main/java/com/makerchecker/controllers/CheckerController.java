@@ -14,6 +14,7 @@ import com.makerchecker.service.CheckerService;
 @RequestMapping("checker")
 public class CheckerController
 {
+	
 	@Autowired
 	private CheckerService checkerService;
 
@@ -27,6 +28,13 @@ public class CheckerController
 	@GetMapping("/authorize")
 	public void authorize(Temperary temperary, @RequestParam("customerCode") String customerCode)
 	{
+
 		checkerService.authorizeRecord(temperary, customerCode);
+	}
+	
+	@GetMapping("/reject")
+	public void name(@RequestParam("customerCode") String customerCode)
+	{
+		checkerService.reject(customerCode);
 	}
 }

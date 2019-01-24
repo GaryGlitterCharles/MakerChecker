@@ -1,5 +1,8 @@
 package com.makerchecker.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import com.makerchecker.repository.JpaRepositoryMaster;
 @Service
 public class CheckerService
 {
+	
+	
 	@Autowired
 	private JpaRepoInterfaceTemp tempRepo;
 
@@ -26,12 +31,15 @@ public class CheckerService
 	public void authorizeRecord(Temperary temperary, String customerCode)
 	{
 		Temperary temperaryRec = tempRepo.findByCustomerCode(customerCode);
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
 
 		Master master = new Master();
 		master.setCustomerID(temperaryRec.getCustomerID());
 		master.setActiveInactiveFlag(temperaryRec.getActiveInactiveFlag());
 		master.setAuthorizedBy(temperaryRec.getAuthorizedBy());
-		master.setAuthorizedDate(temperaryRec.getAuthorizedDate());
+		master.setAuthorizedDate(dateFormat.format(date));
 		master.setContactNumber(temperaryRec.getContactNumber());
 		master.setCreateDate(temperaryRec.getCreateDate());
 		master.setCreatedBy(temperaryRec.getCreatedBy());
@@ -47,5 +55,12 @@ public class CheckerService
 		master.setRecordStatus("A");
 		masterRepo.save(master);
 		tempRepo.delete(temperaryRec);
+	}
+	
+	public void reject(String customerCode)
+	{
+		 Temperary temperary =tempRepo.findByCustomerCode(customerCode);
+		 temperary.setRecordStatus("NR");
+		 tempRepo.save(temperary);
 	}
 }

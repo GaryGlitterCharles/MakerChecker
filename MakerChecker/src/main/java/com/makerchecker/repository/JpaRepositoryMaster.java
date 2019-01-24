@@ -6,5 +6,5 @@ import com.makerchecker.domain.Temperary;
 
 public interface JpaRepositoryMaster extends JpaRepository<Master, Integer>
 {
-	Temperary findByCustomerCode(String customerCode);
+	Master findByCustomerCode(String customerCode);
 }

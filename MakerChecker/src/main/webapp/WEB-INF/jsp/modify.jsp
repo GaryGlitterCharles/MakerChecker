@@ -15,34 +15,6 @@ Enter the customerCode: <form:input path="customerCode"/>
 <form:button>submit</form:button>
 	</form:form>
 
-<table>
-
-			
-	
-				<tr>
-					<th>${toModify.customerID}</th>
-					<th>${toModify.customerCode}</th>
-					<th>${toModify.customerName}</th>
-					<th>${toModify.customerAddress1}</th>
-					<th>${toModify.customerAddress2}</th>
-					<th>${toModify.customerPincode}</th>
-					<th>${toModify.customerEmail}</th>
-					<th>${toModify.contactNumber}</th>
-					<th>${toModify.privateContactPerson}</th>
-					<th>${toModify.recordStatus}</th>
-					<th>${toModify.activeInactiveFlag}</th>
-					<th>${toModify.createDate}</th>
-					<th>${toModify.createdBy}</th>
-					<th>${toModify.modifiedDate}</th>
-					<th>${toModify.modifiedBy}</th>
-					<th>${toModify.authorizedDate}</th>
-					<th>${toModify.authorizedBy}</th>
-				</tr>
-				
-				<tr>
-			
-		</table>
-
 
 
 

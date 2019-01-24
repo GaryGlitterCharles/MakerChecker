@@ -16,6 +16,10 @@
 					<c:url var="authorize" value="/checker/authorize">
 						<c:param name="customerCode" value="${element.customerCode}" />
 					</c:url>
+					
+					<c:url var="reject" value="/checker/reject">
+						<c:param name="customerCode" value="${element.customerCode}" />
+					</c:url>
 	
 				<tr>
 					<th>${element.customerID}</th>
@@ -36,6 +40,7 @@
 					<th>${element.authorizedDate}</th>
 					<th>${element.authorizedBy}</th>
 					<th><a href="${authorize}">Authorize</a></th>
+					<th><a href="${reject}">Reject</a></th>
 				</tr>
 				
 				<tr>
