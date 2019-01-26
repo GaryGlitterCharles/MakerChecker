@@ -101,11 +101,16 @@ public class MakerController
 		Master master = makerService.getRecordMA(customerCode);
 		Temperary temperary = makerService.getRecordTE(customerCode);
 
-	
-		
-		model.addAttribute("recordM", master);
+		if (!(master == null) && !(temperary == null))
+		{
+			model.addAttribute("record", temperary);
+		} else
+		{
 
-		model.addAttribute("record", temperary);
+			model.addAttribute("recordM", master);
+
+			model.addAttribute("record", temperary);
+		}
 
 		return "record";
 	}
