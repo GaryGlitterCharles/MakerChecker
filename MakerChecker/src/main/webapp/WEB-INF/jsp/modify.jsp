@@ -13,11 +13,6 @@
 	<form:form action="" modelAttribute="customerCode" method="post">
 Enter the customerCode: <form:input path="customerCode"/>
 <form:button>submit</form:button>
-	</form:form>
-
-
-
-
-	
+	</form:form>	
 </body>
 </html>

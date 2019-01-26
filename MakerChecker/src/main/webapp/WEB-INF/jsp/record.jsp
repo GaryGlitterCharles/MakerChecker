@@ -10,14 +10,22 @@
 </head>
 <body>
 	<table>
-		<c:url var="delete" value="/maker/deleteFromTemp">
-			<c:param name="customerCode" value="${element.customerCode}" />
+		<c:url var="deleteM" value="/maker/deleteFromTemp">
+			<c:param name="customerCode" value="${recordM.customerCode}" />
+		</c:url>
+
+		<c:url var="modifyM" value="/maker/modify">
+			<c:param name="customerCode" value="${recordM.customerCode}" />
+		</c:url>
+
+
+		<c:url var="delete" value="/maker/deleteFromTemp1">
+			<c:param name="customerCode" value="${record.customerCode}" />
 		</c:url>
 
 		<c:url var="modify" value="/maker/modify">
-			<c:param name="customerCode" value="${element.customerCode}" />
+			<c:param name="customerCode" value="${record.customerCode}" />
 		</c:url>
-
 
 		<tr>
 			<th>${record.customerCode}</th>
@@ -38,11 +46,8 @@
 			<th>${record.authorizedBy}</th>
 			<th><a href="${modify}">Modify</a></th>
 			<th><a href="${delete}">Delete</a></th>
-		</tr>
 
 
-
-		<tr>
 			<th>${recordM.customerCode}</th>
 			<th>${recordM.customerName}</th>
 			<th>${recordM.customerAddress1}</th>
@@ -59,11 +64,11 @@
 			<th>${recordM.modifiedBy}</th>
 			<th>${recordM.authorizedDate}</th>
 			<th>${recordM.authorizedBy}</th>
-			<th><a href="${modify}">Modify</a></th>
-			<th><a href="${delete}">Delete</a></th>
+			<th><a href="${modifyM}">Modify</a></th>
+			<th><a href="${deleteM}">Delete</a></th>
 		</tr>
-
-		<tr>
 	</table>
+
+
 </body>
 </html>

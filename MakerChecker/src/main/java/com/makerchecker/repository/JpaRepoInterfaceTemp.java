@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.makerchecker.domain.Temperary;
 @Repository
-public interface JpaRepoInterfaceTemp extends JpaRepository<Temperary, Integer>
+public interface JpaRepoInterfaceTemp extends JpaRepository<Temperary, String>
 {
 	@Query("select t from Temperary t")
 	public List<Temperary> findAll();

@@ -37,4 +37,5 @@ public class CheckerController
 	{
 		checkerService.reject(customerCode);
 	}
+	
 }
