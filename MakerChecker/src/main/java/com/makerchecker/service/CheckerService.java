@@ -32,7 +32,12 @@ public class CheckerService
 		Date date = new Date();
 
 		temperary = tempRepo.findByCustomerCode(customerCode);
+		master = masterRepo.findByCustomerCode(customerCode);
+		
 
+		
+		
+		
 		if ((masterRepo.findByCustomerCode(customerCode) == null))
 		{
 			Master master2 = new Master();
@@ -56,9 +61,10 @@ public class CheckerService
 			master2.setRecordStatus("A");
 			masterRepo.save(master2);
 			tempRepo.delete(temperary);
-		} else
+		} 
+		else
 		{
-			master = masterRepo.findByCustomerCode(customerCode);
+			
 			master.setCustomerID(temperary.getCustomerID());
 			master.setActiveInactiveFlag(temperary.getActiveInactiveFlag());
 			master.setAuthorizedBy(temperary.getAuthorizedBy());
@@ -79,6 +85,12 @@ public class CheckerService
 			masterRepo.save(master);
 			tempRepo.delete(temperary);
 		}
+		
+		if(temperary.getRecordStatus().equals("D"))
+		{
+			tempRepo.delete(temperary);
+			masterRepo.delete(master);
+		}
 
 
 	}
@@ -91,10 +103,18 @@ public class CheckerService
 			temperary.setRecordStatus("MR");
 			tempRepo.save(temperary);
 		}
+		else if(temperary.getRecordStatus().equals("D"))
+		{
+			temperary.setRecordStatus("DR");
+			tempRepo.save(temperary);
+		}
+		
+		
 		else {
 			
 			temperary.setRecordStatus("NR");
 			tempRepo.save(temperary);
 		}
+	
 	}
 }

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.makerchecker.domain.Master;
 import com.makerchecker.domain.Temperary;
 import com.makerchecker.repository.JpaRepoInterfaceTemp;
@@ -14,8 +13,6 @@ import com.makerchecker.repository.JpaRepositoryMaster;
 public class MakerService
 {
 
-	
-	
 	@Autowired
 	private JpaRepoInterfaceTemp tempRepo;
 
@@ -24,30 +21,35 @@ public class MakerService
 
 	public void createRecord(Temperary tempRecord)
 	{
-		
+
 		tempRecord.setRecordStatus("N");
 		tempRepo.save(tempRecord);
 	}
-	
-	
-	
-	public void update(Temperary temperary,Master master,String customerCode)
+
+	public void update(Temperary temperary, Master master, String customerCode)
 	{
-		
+
 		master = masterRepo.findByCustomerCode(customerCode);
-		
-		if(master ==null)
+		// temperary = tempRepo.findByCustomerCode(customerCode);
+		//Temperary temperary2 = tempRepo.findByCustomerCode(customerCode);
+		if (master == null)
 		{
 			temperary.setRecordStatus("N");
 			tempRepo.save(temperary);
+
 		}
+
+//		else if (temperary.getRecordStatus().equals(""))
+//		{
+//			temperary.setRecordStatus("N");
+//			tempRepo.save(temperary);
+//		}
 		else
 		{
 			temperary.setRecordStatus("M");
 			tempRepo.save(temperary);
 		}
-		
-		
+
 //		if (master.getRecordStatus().equals("A"))
 //		{
 //			temperary.setRecordStatus("M");
@@ -58,26 +60,25 @@ public class MakerService
 //			tempRepo.save(temperary);
 //			
 //		}
-		
+
 	}
-	
-	public void updates11(String customerCode,Model model,Temperary temperary,Master master)
+
+	public void updates11(String customerCode, Model model, Temperary temperary, Master master)
 	{
 		tempRepo.findByCustomerCode(customerCode);
 		masterRepo.findByCustomerCode(customerCode);
 	}
-	
 
 	public Temperary up(String customerCode)
 	{
 		return tempRepo.findByCustomerCode(customerCode);
 	}
-	
+
 	public Master upM(String customerCode)
 	{
 		return masterRepo.findByCustomerCode(customerCode);
 	}
-	
+
 	public void modify(String customerCode, Model model, Temperary temperary, Master master)
 	{
 
@@ -124,14 +125,13 @@ public class MakerService
 	public void updateModify(Temperary temperary, String customerCode)
 	{
 		temperary = tempRepo.findByCustomerCode(customerCode);
-		
+
 //		if(temperary.getRecordStatus().equals("MR"))
 //		{
 //			temperary.setRecordStatus("N");
 //			tempRepo.save(temperary);
 //		}
-		
-		
+
 		if (temperary.getRecordStatus().equals("N"))
 		{
 
