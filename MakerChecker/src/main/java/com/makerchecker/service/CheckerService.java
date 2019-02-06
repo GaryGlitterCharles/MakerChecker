@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.makerchecker.domain.Master;
@@ -15,8 +14,7 @@ import com.makerchecker.repository.JpaRepositoryMaster;
 @Service
 public class CheckerService
 {
-	
-	
+
 	@Autowired
 	private JpaRepoInterfaceTemp tempRepo;
 
@@ -28,39 +26,75 @@ public class CheckerService
 		return tempRepo.findAll();
 	}
 
-	public void authorizeRecord(Temperary temperary, String customerCode)
+	public void authorizeRecord(Temperary temperary, String customerCode, Master master)
 	{
-		Temperary temperaryRec = tempRepo.findByCustomerCode(customerCode);
-		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 
-		Master master = new Master();
-		master.setCustomerID(temperaryRec.getCustomerID());
-		master.setActiveInactiveFlag(temperaryRec.getActiveInactiveFlag());
-		master.setAuthorizedBy(temperaryRec.getAuthorizedBy());
-		master.setAuthorizedDate(dateFormat.format(date));
-		master.setContactNumber(temperaryRec.getContactNumber());
-		master.setCreateDate(temperaryRec.getCreateDate());
-		master.setCreatedBy(temperaryRec.getCreatedBy());
-		master.setCustomerAddress1(temperaryRec.getCustomerAddress1());
-		master.setCustomerAddress2(temperaryRec.getCustomerAddress2());
-		master.setCustomerCode(temperaryRec.getCustomerCode());
-		master.setCustomerEmail(temperaryRec.getCustomerEmail());
-		master.setCustomerName(temperaryRec.getCustomerName());
-		master.setCustomerPincode(temperaryRec.getCustomerPincode());
-		master.setModifiedBy(temperaryRec.getModifiedBy());
-		master.setModifiedDate(temperaryRec.getModifiedDate());
-		master.setPrivateContactPerson(temperaryRec.getPrivateContactPerson());
-		master.setRecordStatus("A");
-		masterRepo.save(master);
-		tempRepo.delete(temperaryRec);
+		temperary = tempRepo.findByCustomerCode(customerCode);
+
+		if ((masterRepo.findByCustomerCode(customerCode) == null))
+		{
+			Master master2 = new Master();
+
+			master2.setCustomerID(temperary.getCustomerID());
+			master2.setActiveInactiveFlag(temperary.getActiveInactiveFlag());
+			master2.setAuthorizedBy(temperary.getAuthorizedBy());
+			master2.setAuthorizedDate(dateFormat.format(date));
+			master2.setContactNumber(temperary.getContactNumber());
+			master2.setCreateDate(temperary.getCreateDate());
+			master2.setCreatedBy(temperary.getCreatedBy());
+			master2.setCustomerAddress1(temperary.getCustomerAddress1());
+			master2.setCustomerAddress2(temperary.getCustomerAddress2());
+			master2.setCustomerCode(temperary.getCustomerCode());
+			master2.setCustomerEmail(temperary.getCustomerEmail());
+			master2.setCustomerName(temperary.getCustomerName());
+			master2.setCustomerPincode(temperary.getCustomerPincode());
+			master2.setModifiedBy(temperary.getModifiedBy());
+			master2.setModifiedDate(temperary.getModifiedDate());
+			master2.setPrivateContactPerson(temperary.getPrivateContactPerson());
+			master2.setRecordStatus("A");
+			masterRepo.save(master2);
+			tempRepo.delete(temperary);
+		} else
+		{
+			master = masterRepo.findByCustomerCode(customerCode);
+			master.setCustomerID(temperary.getCustomerID());
+			master.setActiveInactiveFlag(temperary.getActiveInactiveFlag());
+			master.setAuthorizedBy(temperary.getAuthorizedBy());
+			master.setAuthorizedDate(dateFormat.format(date));
+			master.setContactNumber(temperary.getContactNumber());
+			master.setCreateDate(temperary.getCreateDate());
+			master.setCreatedBy(temperary.getCreatedBy());
+			master.setCustomerAddress1(temperary.getCustomerAddress1());
+			master.setCustomerAddress2(temperary.getCustomerAddress2());
+			master.setCustomerCode(temperary.getCustomerCode());
+			master.setCustomerEmail(temperary.getCustomerEmail());
+			master.setCustomerName(temperary.getCustomerName());
+			master.setCustomerPincode(temperary.getCustomerPincode());
+			master.setModifiedBy(temperary.getModifiedBy());
+			master.setModifiedDate(temperary.getModifiedDate());
+			master.setPrivateContactPerson(temperary.getPrivateContactPerson());
+			master.setRecordStatus("A");
+			masterRepo.save(master);
+			tempRepo.delete(temperary);
+		}
+
+
 	}
-	
+
 	public void reject(String customerCode)
 	{
-		 Temperary temperary =tempRepo.findByCustomerCode(customerCode);
-		 temperary.setRecordStatus("NR");
-		 tempRepo.save(temperary);
+		Temperary temperary = tempRepo.findByCustomerCode(customerCode);
+		if(temperary.getRecordStatus().equals("M"))
+		{
+			temperary.setRecordStatus("MR");
+			tempRepo.save(temperary);
+		}
+		else {
+			
+			temperary.setRecordStatus("NR");
+			tempRepo.save(temperary);
+		}
 	}
 }

@@ -21,6 +21,10 @@ if (document.getElementById('datetext').value == ''){
 </script>
 </head>
 <body>
+
+
+
+
 <table>
 
 			
@@ -48,7 +52,7 @@ if (document.getElementById('datetext').value == ''){
 			
 		</table>
 
-	<form:form modelAttribute="modified" action="modifyupdate" method="post">
+	<form:form modelAttribute="modified" action="modifyupdateDetails" method="post">
 	
 	
 	<form:input path="customerID" type="hidden" /><br><br/>
@@ -57,25 +61,25 @@ if (document.getElementById('datetext').value == ''){
 	<form:input path="customerCode" value="${toModify.customerCode}"/><br><br/>
 	
 	<label for="customerName">Customer Name</label>
-	<form:input path="customerName"/><br><br/>
+	<form:input path="customerName"  value="${toModify.customerName}" /><br><br/>
 	
 	<label for="customerAddress1" >Customer Address 1</label>
-	<form:input path="customerAddress1"/><br><br/>
+	<form:input path="customerAddress1" value="${toModify.customerAddress1}"/><br><br/>
 	
 	<label for="customerAddress2">Customer Address 2</label>
-	<form:input path="customerAddress2"/><br><br/>
+	<form:input path="customerAddress2" value="${toModify.customerAddress2}"/><br><br/>
 	
 	<label for="customerPincode">Customer Pincode</label>
-	<form:input path="customerPincode"/><br><br/>
+	<form:input path="customerPincode" value="${toModify.customerPincode}"/><br><br/>
 	
 	<label for="customerEmail">Customer Email</label>
-	<form:input path="customerEmail"/><br><br/>
+	<form:input path="customerEmail" value="${toModify.customerEmail}"/><br><br/>
 	
 	<label for="contactNumber">Contact Number</label>
-	<form:input path="contactNumber"/><br><br/>
+	<form:input path="contactNumber" value="${toModify.contactNumber}"/><br><br/>
 	
 	<label for="privateContactPerson">Private Contact Person</label>
-	<form:input path="privateContactPerson"/><br><br/>
+	<form:input path="privateContactPerson" value="${toModify.privateContactPerson}"/><br><br/>
 	
 	<label for="createDate">Created Date</label>
 	<form:input path="createDate" value="${toModify.createDate}" readonly="true" /><br><br/>
@@ -108,7 +112,7 @@ if (document.getElementById('datetext').value == ''){
 	<form:input path="authorizedBy" type="hidden"/>
 	
 	
-	<input type="submit" value="submit">
+	<form:button>SUBMIT</form:button>
 	</form:form>
 </body>
 </html>

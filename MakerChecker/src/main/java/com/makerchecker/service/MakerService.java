@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.makerchecker.domain.Master;
 import com.makerchecker.domain.Temperary;
 import com.makerchecker.repository.JpaRepoInterfaceTemp;
@@ -13,6 +14,8 @@ import com.makerchecker.repository.JpaRepositoryMaster;
 public class MakerService
 {
 
+	
+	
 	@Autowired
 	private JpaRepoInterfaceTemp tempRepo;
 
@@ -21,17 +24,65 @@ public class MakerService
 
 	public void createRecord(Temperary tempRecord)
 	{
+		
 		tempRecord.setRecordStatus("N");
 		tempRepo.save(tempRecord);
 	}
+	
+	
+	
+	public void update(Temperary temperary,Master master,String customerCode)
+	{
+		
+		master = masterRepo.findByCustomerCode(customerCode);
+		
+		if(master ==null)
+		{
+			temperary.setRecordStatus("N");
+			tempRepo.save(temperary);
+		}
+		else
+		{
+			temperary.setRecordStatus("M");
+			tempRepo.save(temperary);
+		}
+		
+		
+//		if (master.getRecordStatus().equals("A"))
+//		{
+//			temperary.setRecordStatus("M");
+//			tempRepo.save(temperary);
+//		}
+//		else {
+//			temperary.setRecordStatus("N");
+//			tempRepo.save(temperary);
+//			
+//		}
+		
+	}
+	
+	public void updates11(String customerCode,Model model,Temperary temperary,Master master)
+	{
+		tempRepo.findByCustomerCode(customerCode);
+		masterRepo.findByCustomerCode(customerCode);
+	}
+	
 
-	public void modify(String customerCode, Model model)
+	public Temperary up(String customerCode)
+	{
+		return tempRepo.findByCustomerCode(customerCode);
+	}
+	
+	public Master upM(String customerCode)
+	{
+		return masterRepo.findByCustomerCode(customerCode);
+	}
+	
+	public void modify(String customerCode, Model model, Temperary temperary, Master master)
 	{
 
-		Temperary temperary = tempRepo.findByCustomerCode(customerCode);
-		Master master = masterRepo.findByCustomerCode(customerCode);
-
-		// model.addAttribute("toModify", temperary);
+		temperary = tempRepo.findByCustomerCode(customerCode);
+		master = masterRepo.findByCustomerCode(customerCode);
 		model.addAttribute("toModify", master);
 
 		if (master == null)
@@ -45,37 +96,45 @@ public class MakerService
 
 			if (master.getRecordStatus().equals("A"))
 			{
-				Temperary temperary2 = new Temperary();
-				Master master1 = masterRepo.findByCustomerCode(customerCode);
-				temperary2.setActiveInactiveFlag(master1.getActiveInactiveFlag());
-				temperary2.setAuthorizedBy(master1.getAuthorizedBy());
-				temperary2.setAuthorizedDate(master1.getAuthorizedDate());
-				temperary2.setContactNumber(master1.getContactNumber());
-				temperary2.setCreateDate(master1.getCreateDate());
-				temperary2.setCreatedBy(master1.getCreatedBy());
-				temperary2.setCustomerAddress1(master1.getCustomerAddress1());
-				temperary2.setCustomerAddress2(master1.getCustomerAddress2());
-				temperary2.setCustomerCode(master1.getCustomerCode());
-				temperary2.setCustomerEmail(master1.getCustomerEmail());
-				temperary2.setCustomerID(master1.getCustomerID());
-				temperary2.setCustomerName(master1.getCustomerName());
-				temperary2.setCustomerPincode(master1.getCustomerPincode());
-				temperary2.setModifiedBy(master1.getModifiedBy());
-				temperary2.setModifiedDate(master1.getModifiedDate());
-				temperary2.setPrivateContactPerson(master1.getPrivateContactPerson());
+				temperary = new Temperary();
+				master = masterRepo.findByCustomerCode(customerCode);
+				temperary.setActiveInactiveFlag(master.getActiveInactiveFlag());
+				temperary.setAuthorizedBy(master.getAuthorizedBy());
+				temperary.setAuthorizedDate(master.getAuthorizedDate());
+				temperary.setContactNumber(master.getContactNumber());
+				temperary.setCreateDate(master.getCreateDate());
+				temperary.setCreatedBy(master.getCreatedBy());
+				temperary.setCustomerAddress1(master.getCustomerAddress1());
+				temperary.setCustomerAddress2(master.getCustomerAddress2());
+				temperary.setCustomerCode(master.getCustomerCode());
+				temperary.setCustomerEmail(master.getCustomerEmail());
+				temperary.setCustomerID(master.getCustomerID());
+				temperary.setCustomerName(master.getCustomerName());
+				temperary.setCustomerPincode(master.getCustomerPincode());
+				temperary.setModifiedBy(master.getModifiedBy());
+				temperary.setModifiedDate(master.getModifiedDate());
+				temperary.setPrivateContactPerson(master.getPrivateContactPerson());
 
-				temperary2.setRecordStatus("M");
-				tempRepo.save(temperary2);
+				temperary.setRecordStatus("M");
+				tempRepo.save(temperary);
 			}
 		}
 	}
 
-	public void updateModify(Temperary temperary,String customerCode)
+	public void updateModify(Temperary temperary, String customerCode)
 	{
-		 temperary = tempRepo.findByCustomerCode(customerCode);
+		temperary = tempRepo.findByCustomerCode(customerCode);
+		
+//		if(temperary.getRecordStatus().equals("MR"))
+//		{
+//			temperary.setRecordStatus("N");
+//			tempRepo.save(temperary);
+//		}
+		
+		
 		if (temperary.getRecordStatus().equals("N"))
 		{
-			
+
 			temperary.setRecordStatus("N");
 			tempRepo.save(temperary);
 

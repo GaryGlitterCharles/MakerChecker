@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.makerchecker.domain.Master;
 import com.makerchecker.domain.Temperary;
 import com.makerchecker.service.CheckerService;
 
@@ -26,10 +27,10 @@ public class CheckerController
 	}
 
 	@GetMapping("/authorize")
-	public void authorize(Temperary temperary, @RequestParam("customerCode") String customerCode)
+	public void authorize(Temperary temperary, @RequestParam("customerCode") String customerCode, Master master)
 	{
 
-		checkerService.authorizeRecord(temperary, customerCode);
+		checkerService.authorizeRecord(temperary, customerCode,master);
 	}
 	
 	@GetMapping("/reject")

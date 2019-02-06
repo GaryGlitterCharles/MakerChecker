@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,22 +41,53 @@ public class MakerController
 //	}
 
 	@GetMapping("modify")
-	public String modify(Temperary temperary, @RequestParam("customerCode") String customerCode, Model model,
-			Master master)
+	public String modify(Model model, String customerCode,Temperary temperary,Master master)
 	{
 
-		model.addAttribute("customerCode", new Temperary());
+		//model.addAttribute("getUser", new Temperary());
 		model.addAttribute("modified", new Temperary());
 		model.addAttribute("modified", new Master());
-		makerService.modify(customerCode, model);
-
+		//makerService.modify(customerCode, model,temperary,master);
+		
+		master = makerService.upM(customerCode);
+		temperary =  makerService.up(customerCode);
+		
+		if(master==null)
+		{
+			
+			model.addAttribute("toModify",temperary);
+		}
+		else {
+			
+			model.addAttribute("toModify", master);
+		}
+		
+		
 		return "modifyRecord";
 	}
 
-	@PostMapping("modifyupdate")
-	public void name(Temperary temperary, @RequestParam("customerCode") String customerCode)
+	@PostMapping("modify")
+	public String name( @RequestParam("customerCode") String customerCode, @ModelAttribute("modified") Temperary temperary, @ModelAttribute("modified") Master master,Model model)
 	{
+		model.addAttribute("getUser", new Temperary());
+		model.addAttribute("getUser", new Master());
 		makerService.updateModify(temperary, customerCode);
+		//model.addAttribute("toModify", makerService.up(customerCode));
+		
+		
+		return "modifyRecord";
+	}
+	
+	@PostMapping("modifyupdateDetails")
+	public String name1(@RequestParam("customerCode") String customerCode, @ModelAttribute("modified") Temperary temperary, @ModelAttribute("modified") Master master,Model model)
+	{
+		model.addAttribute("getUser", new Temperary());
+		model.addAttribute("getUser", new Master());
+		makerService.update(temperary, master, customerCode);
+		//makerService.createRecord(temperary);
+		model.addAttribute("toModify",  makerService.up(customerCode));
+		//model.addAttribute("toModify",  makerService.upM(customerCode));
+		return "modifyRecord";
 	}
 
 //	@GetMapping("deleteFromTemp")
